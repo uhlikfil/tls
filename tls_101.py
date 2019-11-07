@@ -1,7 +1,6 @@
-
 alice = Agent("I'M 5UppER Kewl h4zKEr")
 bob = Agent()
-mallory = MITM()
+
 
 # Alice has da message, Bob doesn't
 assert alice.msg
