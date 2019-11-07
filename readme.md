@@ -26,7 +26,7 @@ The interface for the ``Agent()`` class should support:
 Please, use recommended values for `p` and `g` for DH key exchange protocol.
 
 ## Task 5: Man-in-the-middle
-Oh, no! Looks like something is wrong here! Who the hell is this Mallory? 
+Oh, no! Looks like something is wrong here! Who the hell is Mallory? 
 Implement `MITM()` class such that `itls_101.py` runs with no errors.
 The interface should support:
 * sending/receiving public data (`p` and `g`)
