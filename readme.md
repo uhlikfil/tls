@@ -1,5 +1,5 @@
 # TLS protocol
-THe goal of this lab is to get familiar with underlying principals of SSL/TLS cryptographic protocol.
+The goal of this lab is to get familiar with underlying principals of SSL/TLS cryptographic protocol.
 
 ## Task 1: Diffie–Hellman key exchange
 Implement the [vanilla](https://en.wikipedia.org/wiki/Diffie–Hellman_key_exchange#Cryptographic_explanation) DH algorithm
