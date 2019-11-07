@@ -12,5 +12,23 @@ Turn a DH secret into a key. Use ``sha1`` to generate `BLOCK_SIZE = 16` long key
 
 ## Task 3: Bulk cipher
 Ensure you have working implementation of AES in CBC mode with PKCS&#35;7 padding. It is recommended to use  `BLOCK_SIZE = 16`
-You will need ``encrypt(key, iv, message)`` and `decrypt(key, iv, encrypted_message)` functions.
+You will need ``encrypt(key, iv, message)`` and `decrypt(key, iv, encrypted_message)` functions. 
 You can check you implementation with ``bulk_cipher.py`` example.
+
+## Task 4: Implement simple SSL/TLS setup
+It's time to have some fun now. Checkout `tls_101.py` example. Implement `Agent()` class such that this code executes with no errors.
+You might want to use DH keys to seed AES_CBC bulk cipher you have implemented before
+The interface for the ``Agent()`` class should support:
+* sending/receiving public data (`p` and `g`)
+* sending/receiving public key
+* sending/receiving messages
+
+Please, use recommended values for `p` and `g` for DH key exchange protocol.
+
+## Task 5: Man-in-the-middle
+Oh, no! Looks like something is wrong here! Who the hell is this Mallory? 
+Implement `MITM()` class such that `itls_101.py` runs with no errors.
+The interface should support:
+* sending/receiving public data (`p` and `g`)
+* sending/receiving public key
+* intercept_message
