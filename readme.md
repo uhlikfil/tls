@@ -8,12 +8,12 @@ Try it with ``p=37`` and `g=5`. Can you make it working with a recommended value
 and ``g=2`` ?
 
 ## Task 2: Diffie–Hellman key 
-Turn a DH secret into a key. Use ``sha1`` to generate `BLOCK_SIZE = 16` long key material
+Turn a DH secret into a key. Use ``sha1`` to generate `BLOCK_SIZE = 16` long key material.
 
 ## Task 3: Bulk cipher
 Ensure you have working implementation of AES in CBC mode with PKCS&#35;7 padding. It is recommended to use  `BLOCK_SIZE = 16`
 You will need ``encrypt(key, iv, message)`` and `decrypt(key, iv, encrypted_message)` functions. 
-You can check you implementation with ``bulk_cipher.py`` example.
+You can check your implementation with ``bulk_cipher.py`` example.
 
 ## Task 4: Implement simple SSL/TLS setup
 It's time to have some fun now. Checkout `tls_101.py` example. Implement `Agent()` class such that this code executes with no errors.
