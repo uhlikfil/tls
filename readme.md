@@ -35,7 +35,7 @@ The interface should support:
 
 ## Task 6: RSA
 RSA algorithm is the most used asymmetric encryption algorithm in the world. It is based on the principal that it is easy to multiply large numbers, but factoring large numbers is very hard.
-Within the TLS context it is used for both key exchange and generate signatures for security certificates. Let us implement this algorithm.
+Within the TLS context it is used for both key exchange and generate signatures for security certificates (do you know why is that possible?). Let us implement this algorithm.
 Here are few hints:
 * Please use `p = 13604067676942311473880378997445560402287533018336255431768131877166265134668090936142489291434933287603794968158158703560092550835351613469384724860663783`, `q = 20711176938531842977036011179660439609300527493811127966259264079533873844612186164429520631818559067891139294434808806132282696875534951083307822997248459` and `e=3` for the key generation procedure.
 * You might want to implement your `invmod` function. Test it with values `a=19` and `m=1212393831`. You should get `701912218`.
