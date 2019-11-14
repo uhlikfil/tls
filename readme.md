@@ -58,13 +58,16 @@ RSA is also used to generate digital signatures. When generating a signature the
 to be "encrypted" with a public key known to a client. In this exercise we are going to implement the attack that broke Firefox's TLS certificate validation about 10 years years ago. The interested reader can refer to [this](https://mailarchive.ietf.org/arch/msg/openpgp/5rnE9ZRN1AokBVj3VqblGlP63QE) article.
 
 The most widely used scheme for RSA signing at that was this: one takes the hash of the message to be signed, and then encodes it like this
-``00 01 FF FF ... FF FF 00 ASN.1 HASH``. Where ``ASN.1`` is a very complex binary encoding of the hash type and length.
+```00 01 FF FF ... FF FF 00 ASN.1 HASH```. 
+Where ``ASN.1`` is a very complex binary encoding of the hash type and length.
 The above then is  "decrypted" with RSA. `FF` bytes provide padding to make the message exactly as long as the modulus `n`.
 
 The intuition behind the Bleichenbacher's RSA attack is that while it's impossible without private key (more specifically, without `d`) to
 find a number that elevated to `e` gives exactly the encoding above, one can get to an approximation,
 for example by taking the `e`-th root of the target message. If `e` is small enough, the approximation might be good enough to get a message like
 ``00 01 FF 00 ASN.1 HASH GARBAGE``
+
+
 If the verification function fails to check that the hash is aligned at the end of the message (i.e. that there are enough `FF` bytes),
 we can fake signatures that will work with any public key using a certain small `e`. As you can see, `n` becomes completely irrelevant
 because exponentiation by `e` never wraps past the modulus.
