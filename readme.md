@@ -42,3 +42,13 @@ Here are few hints:
 Your function should also correctly handles the case  when `a=13` and `m=91`
 * You might want to implement functions `encrypt(bytes_, ...)/decrypt(bytes_,...)` and separately `encrypt_int(int_, ...)/decrypt_int(int_,...)`
 * Please use [big endian](https://en.wikipedia.org/wiki/Endianness#Big-endian) notation when transforming bytes to integer
+
+## Task 7:  RSA broadcast attack
+It's time to check now that despite quite complex math involved in RSA algorithm it is still might be vulnerable to a number of attacks.
+In this exercise we will implement the RSA broadcast attack (a.k.a simplest form of [Håstad's broadcast attack](https://en.wikipedia.org/wiki/Coppersmith's_attack#Håstad's_broadcast_attack)) 
+Assume yourself an attacker who was lucky enough to capture any 3 of the ciphertexts and their corresponding public keys.
+Check out `message_captured`. Here are a few hints for this exercise:
+* The data is encrypted using `encrypt_int(public, bytes2int(message.encode()))`. 
+* Please note, that in all 3 case public keys _are different_
+
+Can you read the message? How Chinese remainder theorem is helping you here?
