@@ -51,4 +51,25 @@ Check out `message_captured`. You also know that those ciphers a related to the 
 * The data is encrypted using `encrypt_int(public, bytes2int(message.encode()))`. 
 * Please note, that in all 3 case public keys _are different_
 
- How Chinese remainder theorem is helping you here?
+How Chinese remainder theorem is helping you here?
+
+## Task 8: Bleichenbacher's RSA attack
+RSA is also used to generate digital signatures. When generating a signature the algorithm is somehow reversed: the message is first "decrypted" with a private key and then is being send over an open channel
+to be "encrypted" with a public key known to a client. In this exercise we are going to implement the attack that broke Firefox's TLS certificate validation about 10 years years ago. The interested reader can refer to [this](https://mailarchive.ietf.org/arch/msg/openpgp/5rnE9ZRN1AokBVj3VqblGlP63QE) article.
+
+The most widely used scheme for RSA signing at that was this: one takes the hash of the message to be signed, and then encodes it like this
+``00 01 FF FF ... FF FF 00 ASN.1 HASH``. Where ``ASN.1`` is a very complex binary encoding of the hash type and length.
+The above then is  "decrypted" with RSA. `FF` bytes provide padding to make the message exactly as long as the modulus `n`.
+
+The intuition behind the Bleichenbacher's RSA attack is that while it's impossible without private key (more specifically, without `d`) to
+find a number that elevated to `e` gives exactly the encoding above, one can get to an approximation,
+for example by taking the `e`-th root of the target message. If `e` is small enough, the approximation might be good enough to get a message like
+``00 01 FF 00 ASN.1 HASH GARBAGE``
+If the verification function fails to check that the hash is aligned at the end of the message (i.e. that there are enough `FF` bytes),
+we can fake signatures that will work with any public key using a certain small `e`. As you can see, `n` becomes completely irrelevant
+because exponentiation by `e` never wraps past the modulus.
+
+In this exercise you will be asked to implement all the functions needed to make code ``rsa_bleichenbachers.py`` running without errors.
+Please, use `p = 19480788016963928122154998009409704650199579180935803274714730386316184054417141690600073553930946636444075859515663914031205286780328040150640437671830139` and
+`q = 17796969605776551869310475203125552045634696428993510870214166498382761292983903655073238902946874986503030958347986885039275191424502139015148025375449097`
+for the key generation procedure. `e` as before is 3.
