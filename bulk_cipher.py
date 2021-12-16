@@ -2,7 +2,7 @@ import random
 import string
 import os
 
-BLOCK_SIZE = 16
+from solutions.aes_interface import BLOCK_SIZE, decrypt, encrypt
 
 key = os.urandom(BLOCK_SIZE)
 iv = os.urandom(BLOCK_SIZE)

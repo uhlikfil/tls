@@ -1,3 +1,4 @@
+from solutions.rsa import decrypt, encrypt, generate_key
 
 private_key, public_key = generate_key(e=3)
 message = "I will not write crypto code myself, but defer to high-level libraries written by experts who took the right decisions for me".encode()

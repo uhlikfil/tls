@@ -1,3 +1,5 @@
+from solutions.tls_agent import Agent
+
 alice = Agent("I'M 5UppER Kewl h4zKEr")
 bob = Agent()
 

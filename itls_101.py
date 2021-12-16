@@ -1,3 +1,5 @@
+from solutions.tls_agent import Agent
+from solutions.tls_mitm import MITM
 
 alice = Agent("I'M 5UppER Kewl h4zKEr")
 bob = Agent()
