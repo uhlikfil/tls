@@ -1,6 +1,14 @@
 import binascii
 
 
+def bytes2int(b: bytes) -> int:
+    return int.from_bytes(b, "big")
+
+
+def int2bytes(i: int) -> bytes:
+    return i.to_bytes((i.bit_length() + 7) // 8, "big")
+
+
 def bin2txt(x: bytes) -> str:
     return x.decode()
 

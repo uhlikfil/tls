@@ -5,7 +5,7 @@
 import json
 from functools import reduce
 
-from solutions.rsa import int2bytes
+from solutions.utils import int2bytes
 
 
 def invpow(x, n):

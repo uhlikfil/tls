@@ -4,7 +4,9 @@
 
 import hashlib
 
-from solutions.rsa import bytes2int, decrypt, encrypt, int2bytes
+from solutions.rsa import decrypt, encrypt
+from solutions.rsa_broadcast_attack import invpow
+from solutions.utils import bytes2int, int2bytes
 
 # recommended values
 p = 19480788016963928122154998009409704650199579180935803274714730386316184054417141690600073553930946636444075859515663914031205286780328040150640437671830139
@@ -24,7 +26,7 @@ def generate_signature(private_key: tuple[int], hash: bytes):
 
 def verify_signature(public_key: tuple[int], signature: bytes, hash: bytes) -> bool:
     decrypted_sig = encrypt(public_key, signature)
-    return hash in decrypted_sig  # very weak verification
+    return b"\x00" + asn_1 + hash in decrypted_sig  # very weak verification
 
 
 def make_padding(n: int, hash_len: int) -> bytes:
@@ -36,11 +38,9 @@ def make_padding(n: int, hash_len: int) -> bytes:
 
 
 def fake_signature(hash: bytes) -> bytes:
-    # make N divisible by 3
-    tmp = b"\x00" + asn_1 + hash
-    n = 2 ** 288 - bytes2int(tmp)
-    tmp += int2bytes(n % 3)
-    N = 2 ** 288 - bytes2int(tmp)
-    # do magic - now `forged_sig ** 3` contains `tmp`
-    forged_sig = 2 ** 1000 - N // 3
-    return int2bytes(forged_sig)
+    # most significant bits will be the important part
+    msb = b"\x00\x01" + b"\xff\x00" + asn_1 + hash
+    garbage = b"\xff" * 80
+    forged_sig = msb + garbage
+    # return the lower bound integer cube root - will mess up the garbage bits, but we don't care
+    return int2bytes(invpow(bytes2int(forged_sig), 3))
